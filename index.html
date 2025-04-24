@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal</title>
+    <link rel="icon" href="https://www.paypalobjects.com/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- SVG Definitions -->
+    <svg class="defs">
+        <symbol id="store-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="12" fill="#142c8e"/>
+            <path d="M6 10H18V18C18 18.5523 17.5523 19 17 19H7C6.44772 19 6 18.5523 6 18V10Z" fill="white"/>
+            <path d="M8 10V9C8 7.34315 9.34315 6 11 6H13C14.6569 6 16 7.34315 16 9V10H8Z" fill="white"/>
+            <rect x="9" y="13" width="2" height="2" fill="#142c8e"/>
+            <rect x="13" y="13" width="2" height="2" fill="#142c8e"/>
+        </symbol>
+    </svg>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-mark-monotone-transparent.svg" alt="PayPal Logo" aria-label="PayPal">
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" id="inicio-link">Home</a></li>
+                    <li><a href="#" class="nav-link" id="enviar-solicitar-link">Send & Request</a></li>
+                    <li><a href="#" class="nav-link">Wallet</a></li>
+                    <li><a href="#" class="nav-link">Activity</a></li>
+                    <li><a href="#" class="nav-link">Help</a></li>
+                </ul>
+            </div>
+            <div class="header-icons">
+                <i class="fa-regular fa-bell header-icon" aria-label="Notifications"></i>
+                <i class="fa-solid fa-gear header-icon" aria-label="Settings"></i>
+                <button class="header-button" aria-label="Log out">LOG OUT</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <div class="main-container" id="dashboard-screen">
+        <div class="left-side">
+            <section class="saldo-section">
+                <div class="saldo-header">
+                    <h2 class="saldo-title">PayPal Balance</h2>
+                    <div class="more-options">⋮</div>
+                </div>
+                <div class="saldo-amount" id="balance-amount">USD 8,857,651,931.00</div>
+                <div class="saldo-disponible">Available</div>
+                <button class="transferir-btn" id="transfer-button">Transfer Funds</button>
+            </section>
+            
+            <section class="movimientos-section">
+                <h2 class="movimientos-title">Recent Activity</h2>
+                <ul class="transaction-list" id="activity-list">
+                    <!-- Transactions will be added dynamically -->
+                </ul>
+            </section>
+        </div>
+        
+        <div class="right-side">
+            <div class="actions-buttons">
+                <button class="action-button" id="send-button" aria-label="Send money">Send</button>
+                <button class="action-button" aria-label="Request money">Request</button>
+            </div>
+            
+            <div class="shortcuts">
+                <div class="shortcut">
+                    <div class="shortcut-icon"><i class="fa-solid fa-building-columns"></i></div>
+                    <div class="shortcut-title">Associate card or bank account</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-icon"><i class="fa-solid fa-file-lines"></i></div>
+                    <div class="shortcut-title">Create a Payment Form</div>
+                </div>
+                <div class="shortcut">
+                    <div class="shortcut-icon"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                    <div class="shortcut-title">More</div>
+                </div>
+            </div>
+            
+            <section class="enviar-nuevo">
+                <div class="enviar-nuevo-header">
+                    <h2 class="enviar-nuevo-title">Send Again</h2>
+                    <div class="more-options">⋮</div>
+                </div>
+                <div class="contacts-list" id="recent-contacts-list">
+                    <!-- Contacts will be added dynamically -->
+                </div>
+            </section>
+            
+            <section class="bank-accounts-section">
+                <div class="bank-accounts-header">
+                    <h2 class="bank-accounts-title">Bank Accounts and Cards</h2>
+                    <div class="more-options">⋮</div>
+                </div>
+                <div class="bank-accounts-list">
+                    <div class="bank-account-item">
+                        <div class="bank-account-info">
+                            <div class="bank-account-icon">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                            <div class="bank-account-name">Banco de Crédito del Perú de ahorros</div>
+                        </div>
+                        <div class="bank-account-digits">**26</div>
+                    </div>
+                    <div class="bank-account-item">
+                        <div class="bank-account-info">
+                            <div class="bank-account-icon">
+                                <i class="fa-solid fa-credit-card"></i>
+                            </div>
+                            <div class="bank-account-name">Visa débito</div>
+                        </div>
+                        <div class="bank-account-digits">**99</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Send Payments Screen -->
+    <div class="send-container hidden" id="send-screen">
+        <div class="send-tabs">
+            <div class="send-tab active">Send</div>
+            <div class="send-tab">Request</div>
+            <div class="send-tab">Contacts</div>
+            <div class="send-tab">More</div>
+        </div>
+
+        <h1 class="send-section-title">Send Payments</h1>
+        
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search name, email, or phone" id="recipient-search" aria-label="Search recipient">
+            <p class="error-message" id="search-error">Please enter a valid name, email, or phone.</p>
+            <div class="suggestions hidden" id="suggestions"></div>
+            <button class="next-button" id="next-button">Next</button>
+        </div>
+
+        <div class="recent-contacts">
+            <h3 class="recent-contacts-title">Recent Contacts</h3>
+            <div class="recent-contacts-list" id="recent-contacts-list-old">
+                <!-- Recent contacts will be added dynamically -->
+            </div>
+        </div>
+
+        <div class="send-options">
+            <h3 class="send-option-title">More Ways to Send</h3>
+            
+            <div class="send-option">
+                <div class="send-option-icon">
+                    <i class="fa-regular fa-file-lines"></i>
+                </div>
+                <div class="send-option-text">
+                    <p class="send-option-label">Send a PayPal Invoice</p>
+                    <p class="send-option-description">Create and track professional invoices.</p>
+                </div>
+            </div>
+            <div class="send-option">
+                <div class="send-option-icon">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <div class="send-option-text">
+                    <p class="send-option-label">International Payments</p>
+                    <p class="send-option-description">Send money across borders securely.</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="contacts-link">View All Contacts</a>
+    </div>
+
+    <!-- Recipient Screen -->
+    <div class="recipient-container hidden" id="recipient-screen">
+        <div class="recipient-card">
+            <div class="profile-section">
+                <div class="profile-image" id="profile-image">
+                    <!-- La imagen se insertará dinámicamente -->
+                </div>
+                <div class="profile-info">
+                    <h2 class="profile-name" id="recipient-name">PayPal User</h2>
+                    <p class="profile-username" id="recipient-username">@user</p>
+                </div>
+            </div>
+
+            <div class="money-input-container">
+                <span class="currency-symbol" id="currency-symbol">$</span>
+                <input type="text" class="money-input" value="0.00" id="money-input" aria-label="Amount to send">
+                <p class="money-error-message" id="money-error">Please enter a valid amount.</p>
+                <div class="currency-selector">
+                    <div class="currency-button" id="currency-button">
+                        USD <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <div class="currency-dropdown" id="currency-dropdown">
+                        <div class="currency-option" data-currency="USD" data-symbol="$">USD</div>
+                        <div class="currency-option" data-currency="EUR" data-symbol="€">EUR</div>
+                        <div class="currency-option" data-currency="GBP" data-symbol="£">GBP</div>
+                    </div>
+                </div>
+            </div>
+
+            <textarea class="note-input" placeholder="Add a note (optional)" id="note-input" aria-label="Transaction note"></textarea>
+
+            <a href="#" class="terms-link">Review our <span style="color: #003087;">Terms of Service</span> for more details.</a>
+
+            <div class="action-buttons">
+                <button class="next-button active" id="confirm-send">Next</button>
+                <a href="#" class="cancel-button" id="cancel-button">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-message" id="loading-message">Processing...</p>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="success-modal">
+            <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-mark-color.svg" alt="PayPal Logo" class="success-logo" aria-label="PayPal">
+            <div class="success-avatar" id="success-avatar">
+                <!-- Avatar will be added dynamically -->
+            </div>
+            <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="success-content">
+                <h2 class="success-title">You have sent a transfer of <span id="sent-amount">0.00 USD</span></h2>
+                <p class="success-message">The transfer will be processed and available within 24-48 business hours.</p>
+            </div>
+            <button class="success-button" id="done-button">Done</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#" class="footer-link">Help & Contact</a>
+            <a href="#" class="footer-link">Fees</a>
+            <a href="#" class="footer-link">Security</a>
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Legal</a>
+            <a href="#" class="footer-link">Business Solutions</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
